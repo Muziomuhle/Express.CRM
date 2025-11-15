@@ -13,8 +13,10 @@ import UserRoute from "./userRoutes"
 import PolicyRoute from "./policyRoutes"
 import DocumentRoute from './documentRoutes'
 import PolicyDocumentRoute from './policyDocumentRoutes'
-import emailTemmplateRoute from './emailTemplateRoutes'
+import emailTemplateRoute from './emailTemplateRoutes'
+import SmsRoute from './smsRoutes'
 
+router.use('/sms', SmsRoute);
 router.use('/lead', LeadRoute);
 router.use('/contact', ContactRoute);
 router.use('/claim', ClaimRoute);
@@ -27,6 +29,6 @@ router.use('/user', UserRoute)
 router.use('/policy', PolicyRoute)
 router.use('/document', DocumentRoute)
 router.use('/policydocument', PolicyDocumentRoute)
-router.use('/emailtemplate', emailTemmplateRoute)
+router.use('/emailtemplate', emailTemplateRoute)
 
 export default router;
