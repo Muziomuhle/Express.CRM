@@ -1,11 +1,12 @@
 const mongoose = require("mongoose");
 const BulkSmsJob = require("../model/BulkSmsJob");
 const SmsBatch = require("../model/SmsBatch");
-const sendSms = require("../utils/sendSms");
+const triggerSendSms = require("../utils/sendSmsFactory");
 
 require("dotenv").config();
 
 async function initDB() {
+  mongoose.set("strictQuery", false);
   await mongoose.connect(process.env.DB_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
@@ -28,7 +29,7 @@ async function processJobs() {
       job.attempts += 1;
       await job.save();
 
-      await sendSms(job.phoneNumber, job.message);
+      await triggerSendSms(job.phoneNumber, job.message);
 
       job.status = "sent";
       await job.save();

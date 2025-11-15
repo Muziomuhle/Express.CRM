@@ -1,10 +1,16 @@
-// worker.js
 const twilio = require('twilio');
+require("dotenv").config();
 
 // Load credentials from environment variables for security
 const accountSid = process.env.TWILIO_ACCOUNT_SID;
 const authToken = process.env.TWILIO_AUTH_TOKEN;
 const twilioPhoneNumber = process.env.TWILIO_PHONE_NUMBER;
+
+console.log("Twilio ENV LOADED:", {
+  accountSid: accountSid ? "OK" : "MISSING",
+  authToken: authToken ? "OK" : "MISSING",
+  twilioPhoneNumber: twilioPhoneNumber || "MISSING"
+});
 
 // Initialize the Twilio client
 const client = twilio(accountSid, authToken);
